@@ -1,0 +1,18 @@
+To start using this application, you need log into postgres and create a database called "tinyurl".  Spelling can be confirmed in db/client.js on line 7. 
+
+You need to "npm install" in terminal to install all dependencies.
+Next you will enter your Postgress password and port into the .env file so that the client can connect.
+
+In terminal, run "node db/seed.js" to create database table for urls.  This will create a table called "urls" with three columns: id, linked_url, and tiny_url.
+
+Then, you can run "nodemon index.js" in terminal to start the server.
+
+From here, we can get the POST request.  I do this in Postman.  Set the action to "POST" and enter url "http://localhost:3000/links".  I am running the local server on the 3000 port.  In the body section, I enter raw data in object form: {"linkedURL":"www.codedge.io."}.  Website address needs to be entered in www format.  From here, press send.
+
+This creates a new table line with our website and a randomly created 6-digit url.  Confirmation is returned in body like so: {"link":"http://localhost:3000/22db76"}.  I verified this POST request in PSQL.
+
+If a value is not inputted with the linkedURL key, Postman will return an object that states: {"error":"missing_url"}.
+
+Now that we have created a tinyurl for this website, we can test in the browser.  In browser, use localhost followed by the tiny url, i.e. "http://localhost:3000/22db76:.  When you submit, the browser redirects to the codedge.io site.
+
+If the tiny url is not entered incorrectly and doesn't match with any of the shortened urls in the table,  the browswer will display JSON object: {"error":"not_found"}.
